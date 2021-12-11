@@ -51,11 +51,11 @@ class DocumentController {
             Map<String, Object> response = new LinkedHashMap<>();
             final DocumentBean document = documentService.addDocument(file);
 
-            response.put("Name", document.getName());
-            response.put("Type", document.getType());
-            response.put("Size", document.getSize());
-            response.put("Preview URL", String.format("%s/doc-rest/preview/%s", springBootDocServer, document.getUuid()));
-            response.put("Download URL", String.format("%s/doc-rest/download/%s", springBootDocServer, document.getUuid()));
+            response.put("name", document.getName());
+            response.put("type", document.getType());
+            response.put("size", document.getSize());
+            response.put("previewUrl", String.format("%s/doc-rest/preview/%s", springBootDocServer, document.getUuid()));
+            response.put("downloadUrl", String.format("%s/doc-rest/download/%s", springBootDocServer, document.getUuid()));
             return response;
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, String.format("Upload failed: %s !", file.getOriginalFilename()));
