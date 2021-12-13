@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriUtils;
@@ -40,11 +41,11 @@ class DocumentController {
         final MultipartFile file = files.get(0);
 
         if(files.size() > 1) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "One file only!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "one.file.only");
         }
 
         if(file.getSize() <= 0){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No file selected!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "no.file.selected");
         }
 
         try{

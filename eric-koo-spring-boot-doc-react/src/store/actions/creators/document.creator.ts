@@ -14,7 +14,6 @@ export const upload = (document: File) =>(dispatch: Dispatch<IDocumentAction>) =
         })
         .catch(error =>{
             const message = (error.response && error.response.data && error.response.data['message']) || error.message || error.toString();
-            console.log(message)
             return Promise.reject(message);
         });
 };

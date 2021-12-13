@@ -1,4 +1,4 @@
-import {combineReducers} from "redux";
+import {combineReducers} from "@reduxjs/toolkit";
 import documentReducer from "./document.reducer";
 
 const reducers =  combineReducers({

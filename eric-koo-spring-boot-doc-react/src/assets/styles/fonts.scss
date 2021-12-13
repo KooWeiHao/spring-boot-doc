@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "BioRhymeLight";
+  src: local("BioRhymeLight"), url("../fonts/BioRhyme/BioRhyme-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Epilogue";
+  src: local("Epilogue"), url("../fonts/Epilogue/static/Epilogue-Regular.ttf") format("truetype");
+}
+
+.font-bio-rhyme-light {
+  font-family: BioRhymeLight;
+}
+
+.font-epilogue {
+  font-family: Epilogue;
+}
