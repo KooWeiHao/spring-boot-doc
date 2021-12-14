@@ -67,6 +67,10 @@
     stroke-width: 10;
 }
 
+.label-text-align{
+    text-align: end;
+}
+
 @media(max-width: 1000px){
     .dropzone{
         padding-left: 0;
@@ -79,5 +83,9 @@
     .padding-top-bottom-file-accepted{
         padding-top: 6.8vh;
         padding-bottom: 6.8vh;
+    }
+
+    .label-text-align{
+        text-align: start;
     }
 }

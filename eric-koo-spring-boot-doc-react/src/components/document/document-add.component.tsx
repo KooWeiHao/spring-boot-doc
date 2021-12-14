@@ -14,8 +14,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {upload} from "../../store/actions/creators/document.creator";
 import {useAppDispatch} from "../../store/store";
+import {useNavigate} from "react-router-dom";
 
 function DocumentAddComponent() {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [error, setError] = useState("");
     const [fileIcon, setFileIcon] = useState(faFileAlt);
@@ -83,7 +85,7 @@ function DocumentAddComponent() {
         const document = acceptedFiles[0];
 
         dispatch(upload(document)).then(() =>{
-            console.log("success");
+            navigate("/document/complete");
         }).catch(error =>{
             setIsUploading(false);
             switch (error){
@@ -151,10 +153,8 @@ function DocumentAddComponent() {
                         </div>
                     </aside>
 
-                    <div className={"row pt-2"}>
-                        <div className={"d-grid gap-2 col-6 mx-auto"}>
-                            <button type={"submit"} className="btn btn-success" disabled={acceptedFiles.length <=0 || isUploading}>UPLOAD</button>
-                        </div>
+                    <div className={"pt-2 d-grid gap-2 col-6 mx-auto"}>
+                        <button type={"submit"} className="btn btn-success" disabled={acceptedFiles.length <=0 || isUploading}>UPLOAD</button>
                     </div>
                 </form>
             </section>
