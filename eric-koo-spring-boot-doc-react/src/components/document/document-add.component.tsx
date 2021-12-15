@@ -15,8 +15,6 @@ import {
 import {upload} from "../../store/actions/creators/document.creator";
 import {useAppDispatch} from "../../store/store";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {RootState} from "../../store/reducers";
 
 function DocumentAddComponent() {
     const navigate = useNavigate();
@@ -24,7 +22,6 @@ function DocumentAddComponent() {
     const [error, setError] = useState("");
     const [fileIcon, setFileIcon] = useState(faFileAlt);
     const [isUploading, setIsUploading] = useState(false);
-    const document = useSelector((state: RootState) => state.document);
 
     const {acceptedFiles, getRootProps, getInputProps} = useDropzone({
         maxFiles:1,
@@ -87,8 +84,8 @@ function DocumentAddComponent() {
         setIsUploading(true);
         const acceptedDocument = acceptedFiles[0];
 
-        dispatch(upload(acceptedDocument)).then(() =>{
-            navigate(`/document/complete/${document?.uuid}`);
+        dispatch(upload(acceptedDocument)).then(uuid =>{
+            navigate(`/document/complete/${uuid}`);
         }).catch(error =>{
             setIsUploading(false);
             switch (error){

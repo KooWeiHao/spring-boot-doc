@@ -1,9 +1,16 @@
 import IDocument from "../../types/document.type";
 import {DocumentActionType, IDocumentAction} from "../actions/types/document.type";
 
-const initialState: IDocument | null = null;
+const initialState: IDocument = {
+    uuid: "",
+    name: "",
+    type: "",
+    size: 0,
+    previewUrl: "",
+    downloadUrl: ""
+};
 
-const documentReducer = (state: IDocument | null = initialState, action: IDocumentAction)=>{
+const documentReducer = (state: IDocument = initialState, action: IDocumentAction)=>{
     const {type, payload} = action;
 
     switch (type) {

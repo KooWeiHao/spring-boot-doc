@@ -10,7 +10,7 @@ export const upload = (document: File) =>(dispatch: Dispatch<IDocumentAction>) =
                 payload: response.data
             });
 
-            return Promise.resolve();
+            return Promise.resolve(response.data.uuid);
         })
         .catch(error =>{
             const message = (error.response && error.response.data && error.response.data['message']) || error.message || error.toString();

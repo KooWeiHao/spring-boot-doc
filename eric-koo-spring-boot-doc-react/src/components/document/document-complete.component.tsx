@@ -16,16 +16,12 @@ function DocumentCompleteComponent() {
 
     useEffect(()=>{
         dispatch(getDocumentByUuid(params.uuid as string)).catch(()=>{
-            onBack();
+            navigate(-1);
         });
-    }, [dispatch]);
+    }, [dispatch, navigate, params.uuid]);
 
     const onCopy = (text: string)=>{
         return navigator.clipboard.writeText(text);
-    };
-
-    const onBack = ()=>{
-        navigate("/document/add");
     };
 
     return (
@@ -83,7 +79,7 @@ function DocumentCompleteComponent() {
                 </div>
 
                 <div className={"pt-2 d-grid gap-2 col-6 mx-auto"}>
-                    <button type={"button"} className="btn btn-success" onClick={onBack}>UPLOAD AGAIN</button>
+                    <button type={"button"} className="btn btn-success" onClick={() => navigate("/document/add")}>UPLOAD AGAIN</button>
                 </div>
             </div>
         </>
