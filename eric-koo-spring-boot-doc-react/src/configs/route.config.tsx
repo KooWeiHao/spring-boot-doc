@@ -10,7 +10,7 @@ function RouteConfig() {
             <Route path="*" element={<Navigate to={"/document/add"}/>}/>
 
             <Route path="document/add" element={<DocumentAddComponent />} />
-            <Route path="document/complete" element={<DocumentCompleteComponent />} />
+            <Route path="document/complete/:uuid" element={<DocumentCompleteComponent />} />
         </Routes>
     );
 }

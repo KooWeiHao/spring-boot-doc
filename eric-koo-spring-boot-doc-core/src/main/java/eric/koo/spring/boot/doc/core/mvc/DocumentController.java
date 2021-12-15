@@ -36,6 +36,13 @@ class DocumentController {
         this.documentService = documentService;
     }
 
+    @PostMapping("get-document-by-uuid")
+    Map<String, Object> getDocumentByUuid(@RequestParam(value = "uuid") String uuid){
+        return documentService.getDocumentByUuid(uuid)
+                .map(this::documentBean2DocumentObject)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s not found!", uuid)));
+    }
+
     @PostMapping("upload")
     Map<String, Object> upload(@RequestParam(value = "file") List<MultipartFile> files){
         final MultipartFile file = files.get(0);
@@ -49,18 +56,25 @@ class DocumentController {
         }
 
         try{
-            Map<String, Object> response = new LinkedHashMap<>();
             final DocumentBean document = documentService.addDocument(file);
-
-            response.put("name", document.getName());
-            response.put("type", document.getType());
-            response.put("size", document.getSize());
-            response.put("previewUrl", String.format("%s/doc-rest/preview/%s", springBootDocServer, document.getUuid()));
-            response.put("downloadUrl", String.format("%s/doc-rest/download/%s", springBootDocServer, document.getUuid()));
-            return response;
+            return documentBean2DocumentObject(document);
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, String.format("Upload failed: %s !", file.getOriginalFilename()));
         }
+    }
+
+    private Map<String, Object> documentBean2DocumentObject(DocumentBean document){
+        Map<String, Object> documentObject = new LinkedHashMap<>();
+        final String uuid = document.getUuid();
+
+        documentObject.put("uuid", uuid);
+        documentObject.put("name", document.getName());
+        documentObject.put("type", document.getType());
+        documentObject.put("size", document.getSize());
+        documentObject.put("previewUrl", String.format("%s/doc-rest/preview/%s", springBootDocServer, uuid));
+        documentObject.put("downloadUrl", String.format("%s/doc-rest/download/%s", springBootDocServer, uuid));
+
+        return documentObject;
     }
 
     @GetMapping("download/{uuid}")

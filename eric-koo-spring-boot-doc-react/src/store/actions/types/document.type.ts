@@ -1,12 +1,13 @@
 import IDocument from "../../../types/document.type";
 
 export enum DocumentActionType {
-    UPLOAD = "UPLOAD"
+    UPLOAD = "UPLOAD",
+    GET_DOCUMENT_BY_UUID = "GET_DOCUMENT_BY_UUID"
 }
 
-interface IAddDocument {
-    type: DocumentActionType.UPLOAD,
+interface IGetDocument {
+    type: DocumentActionType.UPLOAD | DocumentActionType.GET_DOCUMENT_BY_UUID,
     payload: IDocument
 }
 
-export type IDocumentAction = IAddDocument;
+export type IDocumentAction = IGetDocument;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Helmet} from "react-helmet-async";
 import './App.scss';
 import RouteConfig from "./configs/route.config";
@@ -12,7 +12,9 @@ import {far} from '@fortawesome/free-regular-svg-icons';
 library.add(fas, fab, far);
 
 function App() {
-    document.body.classList.add("bg-dark", "text-light");
+    useEffect(() =>{
+        document.body.classList.add("bg-dark", "text-light");
+    });
 
     return (
         <div className={"font-epilogue"}>

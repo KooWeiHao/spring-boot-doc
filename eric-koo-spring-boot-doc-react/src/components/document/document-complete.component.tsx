@@ -3,14 +3,29 @@ import {Helmet} from "react-helmet-async";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/reducers";
 import {faClipboard} from "@fortawesome/free-regular-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {useEffect} from "react";
+import {useAppDispatch} from "../../store/store";
+import {getDocumentByUuid} from "../../store/actions/creators/document.creator";
 
 function DocumentCompleteComponent() {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const params = useParams();
     const document = useSelector((state: RootState) => state.document);
+
+    useEffect(()=>{
+        dispatch(getDocumentByUuid(params.uuid as string)).catch(()=>{
+            onBack();
+        });
+    }, [dispatch]);
 
     const onCopy = (text: string)=>{
         return navigator.clipboard.writeText(text);
+    };
+
+    const onBack = ()=>{
+        navigate("/document/add");
     };
 
     return (
@@ -68,7 +83,7 @@ function DocumentCompleteComponent() {
                 </div>
 
                 <div className={"pt-2 d-grid gap-2 col-6 mx-auto"}>
-                    <button type={"button"} className="btn btn-success" onClick={() => navigate("/document/add")}>UPLOAD AGAIN</button>
+                    <button type={"button"} className="btn btn-success" onClick={onBack}>UPLOAD AGAIN</button>
                 </div>
             </div>
         </>

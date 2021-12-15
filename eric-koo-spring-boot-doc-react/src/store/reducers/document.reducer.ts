@@ -8,6 +8,7 @@ const documentReducer = (state: IDocument | null = initialState, action: IDocume
 
     switch (type) {
         case DocumentActionType.UPLOAD:
+        case DocumentActionType.GET_DOCUMENT_BY_UUID:
             return payload;
 
         default:
