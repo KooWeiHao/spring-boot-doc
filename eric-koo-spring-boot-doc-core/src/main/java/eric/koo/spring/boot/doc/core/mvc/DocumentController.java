@@ -1,9 +1,11 @@
 package eric.koo.spring.boot.doc.core.mvc;
 
 import eric.koo.spring.boot.doc.api.entity.DocumentBean;
+import eric.koo.spring.boot.doc.api.model.DocumentModel;
 import eric.koo.spring.boot.doc.api.service.DocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -11,15 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriUtils;
 
 import java.nio.charset.StandardCharsets;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/doc-rest")
@@ -37,14 +36,14 @@ class DocumentController {
     }
 
     @PostMapping("get-document-by-uuid")
-    Map<String, Object> getDocumentByUuid(@RequestParam(value = "uuid") String uuid){
+    DocumentModel getDocumentByUuid(@RequestParam(value = "uuid") String uuid){
         return documentService.getDocumentByUuid(uuid)
-                .map(this::documentBean2DocumentObject)
+                .map(this::documentBean2DocumentModel)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("%s not found!", uuid)));
     }
 
     @PostMapping("upload")
-    Map<String, Object> upload(@RequestParam(value = "file") List<MultipartFile> files){
+    DocumentModel upload(@RequestParam(value = "file") List<MultipartFile> files){
         final MultipartFile file = files.get(0);
 
         if(files.size() > 1) {
@@ -57,24 +56,21 @@ class DocumentController {
 
         try{
             final DocumentBean document = documentService.addDocument(file);
-            return documentBean2DocumentObject(document);
+            return documentBean2DocumentModel(document);
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, String.format("Upload failed: %s !", file.getOriginalFilename()));
         }
     }
 
-    private Map<String, Object> documentBean2DocumentObject(DocumentBean document){
-        Map<String, Object> documentObject = new LinkedHashMap<>();
+    private DocumentModel documentBean2DocumentModel(DocumentBean document){
         final String uuid = document.getUuid();
+        DocumentModel documentModel = new DocumentModel();
 
-        documentObject.put("uuid", uuid);
-        documentObject.put("name", document.getName());
-        documentObject.put("type", document.getType());
-        documentObject.put("size", document.getSize());
-        documentObject.put("previewUrl", String.format("%s/doc-rest/preview/%s", springBootDocServer, uuid));
-        documentObject.put("downloadUrl", String.format("%s/doc-rest/download/%s", springBootDocServer, uuid));
+        BeanUtils.copyProperties(document, documentModel);
+        documentModel.setPreviewUrl(String.format("%s/doc-rest/preview/%s", springBootDocServer, uuid));
+        documentModel.setDownloadUrl(String.format("%s/doc-rest/preview/%s", springBootDocServer, uuid));
 
-        return documentObject;
+        return documentModel;
     }
 
     @GetMapping("download/{uuid}")

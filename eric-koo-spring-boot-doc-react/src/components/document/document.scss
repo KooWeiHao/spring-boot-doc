@@ -25,6 +25,7 @@
     cursor: pointer;
     justify-content: center;
     position: relative;
+    text-align: center;
 }
 
 .dropzone-accepted{
@@ -37,6 +38,10 @@
 
 .dropzone-disabled{
     border-color: #81FF69;
+}
+
+.dropzone-active{
+    border-color: #FAED27;
 }
 
 .dropzone-disabled:after{
@@ -57,7 +62,7 @@
     color: #FF2400;
 }
 
-.padding-top-bottom-file-accepted{
+.padding-file-accepted{
     padding-top: 5vh;
     padding-bottom: 5vh;
 }
@@ -72,17 +77,8 @@
 }
 
 @media(max-width: 1000px){
-    .dropzone{
-        padding-left: 0;
-    }
-
-    .padding-left-10-vh{
-        padding-left: 10vh !important
-    }
-
-    .padding-top-bottom-file-accepted{
-        padding-top: 6.8vh;
-        padding-bottom: 6.8vh;
+    .padding-file-accepted{
+        padding: 5vh;
     }
 
     .label-text-align{

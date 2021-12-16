@@ -23,7 +23,7 @@ function DocumentAddComponent() {
     const [fileIcon, setFileIcon] = useState(faFileAlt);
     const [isUploading, setIsUploading] = useState(false);
 
-    const {acceptedFiles, getRootProps, getInputProps} = useDropzone({
+    const {acceptedFiles, getRootProps, getInputProps, isDragActive, isFileDialogActive} = useDropzone({
         maxFiles:1,
         maxSize:2097152,
 
@@ -115,9 +115,9 @@ function DocumentAddComponent() {
 
             <section className="container-lg row center">
                 <form onSubmit={ e =>{ e.preventDefault(); onUpload()}}>
-                    <div {...getRootProps({className: classNames('dropzone bg-black bg-gradient', {'padding-top-bottom-file-accepted dropzone-accepted': acceptedFiles.length > 0}, {'dropzone-rejected': error}, {'dropzone-disabled': isUploading})})}>
+                    <div {...getRootProps({className: classNames('dropzone bg-black bg-gradient', {'padding-file-accepted dropzone-accepted': acceptedFiles.length > 0}, {'dropzone-rejected': error}, {'dropzone-disabled': isUploading}, {'dropzone-active': isFileDialogActive || isDragActive})})}>
                         {isUploading && (
-                            <div className={"position-absolute padding-left-10-vh"}>
+                            <div className={"position-absolute"}>
                                 <div className="spinner-grow me-2 spinner" role="status"/>
                                 <div className="spinner-grow me-2 spinner" role="status"/>
                                 <div className="spinner-grow me-2 spinner" role="status"/>
@@ -125,26 +125,35 @@ function DocumentAddComponent() {
                         )}
                         <input {...getInputProps()}/>
                         {acceptedFiles.length <= 0 && (
-                            <div className={"padding-left-10-vh"}>Drag and drop your document here, or click to select document</div>
+                            <div>Drag and drop your document here, or click to select document</div>
                         )}
                         {acceptedFiles.length > 0 && (
-                            <div className={"w-100"}>
-                                <div className={"text-center padding-left-10-vh pb-2"}>
-                                    <FontAwesomeIcon icon={fileIcon} size={"4x"} className={"file-icon-stroke"}/>
+                            <>
+                                <div className={"row pb-2"}>
+                                    <div className={"col-12"}>
+                                        <FontAwesomeIcon icon={fileIcon} size={"4x"} className={"file-icon-stroke"}/>
+                                    </div>
                                 </div>
-                                <div className="row">
-                                    <label className="col-6 text-end pe-0">NAME:</label>
-                                    <div className="col-6">{acceptedFiles[0].name}</div>
+                                <div className={"card bg-dark"}>
+                                    <div className="card-body">
+                                        <div className={"row"}>
+                                            <div className={"col-12"}>
+                                                Name: {acceptedFiles[0].name}
+                                            </div>
+                                        </div>
+                                        <div className={"row"}>
+                                            <div className={"col-12"}>
+                                                Size: {acceptedFiles[0].size} bytes
+                                            </div>
+                                        </div>
+                                        <div className={"row"}>
+                                            <div className={"col-12"}>
+                                                Type: {acceptedFiles[0].type}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="row">
-                                    <label className="col-6 text-end pe-0">SIZE:</label>
-                                    <div className="col-6">{acceptedFiles[0].size} bytes</div>
-                                </div>
-                                <div className="row">
-                                    <label className="col-6 text-end pe-0">TYPE:</label>
-                                    <div className="col-6">{acceptedFiles[0].type}</div>
-                                </div>
-                            </div>
+                            </>
                         )}
                     </div>
                     <aside className={"ps-0 pe-0"}>
