@@ -117,7 +117,7 @@ function DocumentAddComponent() {
                 <form onSubmit={ e =>{ e.preventDefault(); onUpload()}}>
                     <div {...getRootProps({className: classNames('dropzone bg-black bg-gradient', {'padding-file-accepted dropzone-accepted': acceptedFiles.length > 0}, {'dropzone-rejected': error}, {'dropzone-disabled': isUploading}, {'dropzone-active': isFileDialogActive || isDragActive})})}>
                         {isUploading && (
-                            <div className={"position-absolute"}>
+                            <div className={"loading-spinner"}>
                                 <div className="spinner-grow me-2 spinner" role="status"/>
                                 <div className="spinner-grow me-2 spinner" role="status"/>
                                 <div className="spinner-grow me-2 spinner" role="status"/>

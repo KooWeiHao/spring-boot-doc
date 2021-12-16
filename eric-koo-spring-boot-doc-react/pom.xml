@@ -17,6 +17,8 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <node.version>v14.16.0</node.version>
         <npm.version>6.14.11</npm.version>
+
+        <project.rest.directory>../eric-koo-spring-boot-doc-rest</project.rest.directory>
     </properties>
 
     <build>
@@ -33,7 +35,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes/static</outputDirectory>
+                            <outputDirectory>${project.rest.directory}/target/classes/static</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>build</directory>

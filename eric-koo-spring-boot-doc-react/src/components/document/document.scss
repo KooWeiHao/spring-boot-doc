@@ -76,6 +76,11 @@
     text-align: end;
 }
 
+.loading-spinner{
+    position: absolute;
+    z-index: 9999;
+}
+
 @media(max-width: 1000px){
     .padding-file-accepted{
         padding: 5vh;
