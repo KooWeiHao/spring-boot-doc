@@ -85,7 +85,7 @@ function DocumentAddComponent() {
         const acceptedDocument = acceptedFiles[0];
 
         dispatch(upload(acceptedDocument)).then(uuid =>{
-            navigate(`/document/complete/${uuid}`);
+            navigate(`/eric-koo/document/complete/${uuid}`);
         }).catch(error =>{
             setIsUploading(false);
             switch (error){

@@ -6,11 +6,11 @@ import DocumentCompleteComponent from "../components/document/document-complete.
 function RouteConfig() {
     return (
         <Routes>
-            <Route path="/" element={<Navigate to={"/document/add"}/>}/>
-            <Route path="*" element={<Navigate to={"/document/add"}/>}/>
+            <Route path="/eric-koo" element={<Navigate to={"/eric-koo/document/add"}/>}/>
+            <Route path="*" element={<Navigate to={"/eric-koo"}/>}/>
 
-            <Route path="document/add" element={<DocumentAddComponent />} />
-            <Route path="document/complete/:uuid" element={<DocumentCompleteComponent />} />
+            <Route path="eric-koo/document/add" element={<DocumentAddComponent />} />
+            <Route path="eric-koo/document/complete/:uuid" element={<DocumentCompleteComponent />} />
         </Routes>
     );
 }
