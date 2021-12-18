@@ -1,5 +1,4 @@
-# Eric Koo's Document
-> `Upload & Download any document`
+# Upload & Download any document :open_file_folder:
 > _Just a random project built with [React], [Spring Boot], [PostgreSQL], [Docker] & [Heroku]_
 
 [![react-2.png](https://i.postimg.cc/XYhjD9Dr/react-2.png)](https://postimg.cc/rD12DRTT) [![spring-edf462fec682b9d48cf628eaf9e19521.png](https://i.postimg.cc/BnbB4GZj/spring-edf462fec682b9d48cf628eaf9e19521.png)](https://postimg.cc/jDV74m7T) [![elephant.png](https://i.postimg.cc/sxB33XLn/elephant.png)](https://postimg.cc/y3zMPVs9) [![vertical-logo-monochromatic.png](https://i.postimg.cc/XvmgJ11n/vertical-logo-monochromatic.png)](https://postimg.cc/06GSXnq4) [![heroku-logotype-vertical-purple.png](https://i.postimg.cc/T3Zxcfpm/heroku-logotype-vertical-purple.png)](https://postimg.cc/Sn7HS0LN)
