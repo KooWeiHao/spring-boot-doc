@@ -6,9 +6,9 @@ import DocumentCompleteComponent from "../components/document/document-complete.
 function RouteConfig() {
     return (
         <Routes>
-            <Route path="*" element={<Navigate to={"eric-koo/document"}/>}/>
+            <Route path="*" element={<Navigate to={"document"}/>}/>
 
-            <Route path="/eric-koo/document">
+            <Route path="document">
                 <Route index element={<Navigate to={"add"}/>}/>
                 <Route path="add" element={<DocumentAddComponent />}/>
                 <Route path="complete/:uuid" element={<DocumentCompleteComponent />}/>

@@ -79,7 +79,7 @@ function DocumentCompleteComponent() {
                 </div>
 
                 <div className={"pt-2 d-grid gap-2 col-6 mx-auto"}>
-                    <button type={"button"} className="btn btn-success" onClick={() => navigate("/eric-koo/document/add")}>UPLOAD AGAIN</button>
+                    <button type={"button"} className="btn btn-success" onClick={() => navigate("/document/add")}>UPLOAD AGAIN</button>
                 </div>
             </div>
         </>
