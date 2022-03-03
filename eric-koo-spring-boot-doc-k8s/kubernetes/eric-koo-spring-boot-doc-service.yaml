@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: live
+  name: doc-rest
+  labels:
+    app: doc-rest
+spec:
+  selector:
+    app: doc-rest
+  ports:
+    - protocol: "TCP"
+      port: 31000
+      targetPort: 31000
+      nodePort: 31050
+  type: LoadBalancer

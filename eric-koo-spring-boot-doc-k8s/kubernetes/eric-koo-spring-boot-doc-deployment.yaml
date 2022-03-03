@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: live
+  name: doc-rest
+  labels:
+    app: doc-rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doc-rest
+  template:
+    metadata:
+      labels:
+        app: doc-rest
+    spec:
+      containers:
+        - name: blog-rest
+          imagePullPolicy: Always
+          image: erickoo/spring-boot-doc-rest:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 31000
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: eric-koo-spring-boot-doc-secret-live
+                  key: db-username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: eric-koo-spring-boot-doc-secret-live
+                  key: db-password
